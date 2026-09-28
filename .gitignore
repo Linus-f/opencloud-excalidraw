@@ -21,3 +21,7 @@ docker-compose.override.yml
 
 # local k8s deployment files
 /k8s/
+
+# module federation temp files
+.__mf__temp/
+

@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Excalidraw, serializeAsJSON, loadFromBlob } from '@excalidraw/excalidraw'
 import '@excalidraw/excalidraw/index.css'
-import type { ExcalidrawImperativeAPI, ExcalidrawElement, AppState, BinaryFiles } from '@excalidraw/excalidraw/types'
+import type { ExcalidrawImperativeAPI, AppState, BinaryFiles } from '@excalidraw/excalidraw/types'
+import type { ExcalidrawElement } from '@excalidraw/excalidraw/element/types'
 
 interface ExcalidrawWrapperProps {
   initialData?: string
@@ -10,7 +11,12 @@ interface ExcalidrawWrapperProps {
   onSave?: () => void
 }
 
-export default function ExcalidrawWrapper({ initialData, readOnly = false, onChange, onSave }: ExcalidrawWrapperProps) {
+export default function ExcalidrawWrapper({
+  initialData,
+  readOnly = false,
+  onChange,
+  onSave
+}: ExcalidrawWrapperProps) {
   const excalidrawAPIRef = useRef<ExcalidrawImperativeAPI | null>(null)
   const [apiReady, setApiReady] = useState(false)
   const loadedDataRef = useRef<string | null>(null)
@@ -64,7 +70,11 @@ export default function ExcalidrawWrapper({ initialData, readOnly = false, onCha
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [handleSave])
 
-  const handleChange = (elements: readonly ExcalidrawElement[], appState: AppState, files: BinaryFiles) => {
+  const handleChange = (
+    elements: readonly ExcalidrawElement[],
+    appState: AppState,
+    files: BinaryFiles
+  ) => {
     if (!onChange || !excalidrawAPIRef.current) return
 
     isInternalChange.current = true

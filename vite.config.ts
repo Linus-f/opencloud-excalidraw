@@ -13,9 +13,7 @@ export default (env: any) => {
 
   // Remove the vue plugin from SDK
   if (baseConfig.plugins) {
-    baseConfig.plugins = baseConfig.plugins.filter(
-      (plugin: any) => plugin?.name !== 'vite:vue'
-    )
+    baseConfig.plugins = baseConfig.plugins.filter((plugin: any) => plugin?.name !== 'vite:vue')
   }
 
   return mergeConfig(baseConfig, {
@@ -29,6 +27,13 @@ export default (env: any) => {
     ],
     optimizeDeps: {
       exclude: ['veaury']
+    },
+    test: {
+      server: {
+        deps: {
+          inline: ['@excalidraw/excalidraw', 'open-color']
+        }
+      }
     }
   })
 }

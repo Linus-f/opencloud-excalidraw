@@ -4,7 +4,7 @@ export function useFileOperations() {
   const clientService = useClientService()
 
   async function loadFile(fileUrl: string): Promise<string> {
-    const response = await clientService.httpAuthenticated.get(fileUrl, {
+    const response = await clientService.httpAuthenticated.get<string>(fileUrl, {
       responseType: 'text'
     })
     return response.data

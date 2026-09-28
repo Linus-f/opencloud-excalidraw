@@ -28,7 +28,7 @@ Excalidraw loads fonts from `esm.sh` at runtime. You need to add `https://esm.sh
 directives:
   font-src:
     - "'self'"
-    - "https://esm.sh/"
+    - 'https://esm.sh/'
 ```
 
 Without this, fonts will be blocked and Excalidraw will fall back to system fonts.
